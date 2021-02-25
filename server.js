@@ -23,25 +23,17 @@ function Run() {
 
         console.log("Connected to DB");
         con.query("SELECT * FROM markets;", (qerr, res) => {
-            console.log(res[0])
+            res.forEach(market => {
+               CheckMarket(market.Abbr) 
+            });
 
             con.end()
         })
     });
-    
-
-    fs.readFile(path.resolve("./markets.json"), (marketReadErr, data) => {
-        if (marketReadErr) throw marketReadErr
-
-        const markets = JSON.parse(data)
-        markets.forEach(market => {
-            CheckMarket(market)
-        })
-    })
 }
 
-function CheckMarket(market) {
-    request(`https://api.litebit.eu/market/${market.name}`, (requestErr, res, body) => {
+function CheckMarket(marketAbbr) {
+    request(`https://api.litebit.eu/market/${marketAbbr}`, (requestErr, res, body) => {
         if (requestErr) throw requestErr
         let marketData = JSON.parse(body)
         fs.readFile(path.resolve("./notified-users.json"), (userReadError, data) => {
