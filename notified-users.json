@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Thomas van der Plas",
+        "email": "thomasvanderplas.leiden@gmail.com",
+        "markets": [
+            {
+                "name": "ada",
+                "minSell": 2.0
+            },
+            {
+                "name": "enj",
+                "minSell": 1.0
+            }
+        ]
+    },
+    {
+        "name": "Bart van Doorn",
+        "email": "bart.van.doorn.smite@gmail.com",
+        "markets": [
+            {
+                "name": "ada",
+                "minSell": 2.0
+            },
+            {
+                "name": "enj",
+                "minSell": 1.0
+            }
+        ]
+    }
+]

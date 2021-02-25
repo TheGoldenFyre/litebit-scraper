@@ -1,0 +1,28 @@
+{
+  "name": "litebit-scraper",
+  "version": "1.0.0",
+  "description": "notifies the selected users of a change to crypto prices via email with the litebit.eu api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheGoldenFyre/litebit-scraper.git"
+  },
+  "keywords": [
+    "webscraper",
+    "crypto"
+  ],
+  "author": "Thomas van der Plas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheGoldenFyre/litebit-scraper/issues"
+  },
+  "homepage": "https://github.com/TheGoldenFyre/litebit-scraper#readme",
+  "dependencies": {
+    "node-schedule": "^2.0.0",
+    "request": "^2.88.2"
+  }
+}
