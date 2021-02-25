@@ -17,6 +17,7 @@ var con = mysql.createConnection({
 const job = schedule.scheduleJob("*/30 * * * * *", Run)
 
 function Run() {
+    con.end()
     // Reads into memory the markets that are currently being watched
     con.connect(function(err) {
         if (err) throw err;
@@ -26,8 +27,6 @@ function Run() {
             res.forEach(market => {
                CheckMarket(market.Abbr) 
             });
-
-            con.end()
         })
     });
 }
