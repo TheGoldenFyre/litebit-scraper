@@ -21,7 +21,7 @@ function Run() {
         if (err) throw err;
 
         console.log("Connected to DB");
-        con.query("select * from markets", (qerr, res) => {
+        con.query("use LITEBITDB; select * from markets;", (qerr, res) => {
             console.log(res)
         })
     });

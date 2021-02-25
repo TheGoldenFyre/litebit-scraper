@@ -23,6 +23,7 @@
   "homepage": "https://github.com/TheGoldenFyre/litebit-scraper#readme",
   "dependencies": {
     "mongodb": "^3.6.4",
+    "mysql": "^2.18.1",
     "node-mailjet": "^3.3.1",
     "node-schedule": "^2.0.0",
     "request": "^2.88.2"
