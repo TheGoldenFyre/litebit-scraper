@@ -5,11 +5,13 @@
         "markets": [
             {
                 "name": "ada",
-                "minSell": 2.0
+                "minSell": 0.5,
+                "wasNotified": false
             },
             {
                 "name": "enj",
-                "minSell": 1.0
+                "minSell": 1.0,
+                "wasNotified": false
             }
         ]
     },
@@ -19,11 +21,13 @@
         "markets": [
             {
                 "name": "ada",
-                "minSell": 2.0
+                "minSell": 2.0,
+                "wasNotified": false
             },
             {
                 "name": "enj",
-                "minSell": 1.0
+                "minSell": 1.0,
+                "wasNotified": false
             }
         ]
     }

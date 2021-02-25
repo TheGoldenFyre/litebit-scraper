@@ -1,6 +1,6 @@
 const schedule = require("node-schedule")
 const request = require("request")
-const mailjet = require("node-mailjet").connect()
+const mailjet = require("./mailjet")
 let fs = require("fs")
 let path = require("path")
 
@@ -38,13 +38,9 @@ function HandleUser(user, market) {
     let selectedUserMarket = user.markets.find(userMarket => market.abbr === userMarket.name)
     if (selectedUserMarket) {
         if (selectedUserMarket.minSell < market.sell) {
-            SendEmail(user, selectedUserMarket)
+            mailjet(user, market)
         } else {
             console.log(`Price not high enough.\nUser: ${user.name} - Market: ${market.abbr}\n€${market.sell} - €${selectedUserMarket.minSell}`)
         }
     }
-}
-
-function SendEmail(user, selectedUserMarket) {
-
 }
