@@ -8,7 +8,8 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: "192.168.2.35",
     user: "crypto",
-    password: "CryptoStonks"
+    password: "CryptoStonks",
+    database: "LITEBITDB"
 });
 
 
@@ -21,7 +22,8 @@ function Run() {
         if (err) throw err;
 
         console.log("Connected to DB");
-        con.query("use LITEBITDB; select * from markets;", (qerr, res) => {
+        con.query("SELECT * FROM markets;", (qerr, res) => {
+            console.log(qerr)
             console.log(res)
         })
     });
