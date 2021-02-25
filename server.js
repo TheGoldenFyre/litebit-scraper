@@ -4,11 +4,28 @@ const mailjet = require("./mailjet")
 let fs = require("fs")
 let path = require("path")
 
+var mysql = require('mysql');
+var con = mysql.createConnection({
+    host: "192.168.2.35",
+    user: "crypto",
+    password: "CryptoStonks"
+});
+
+
 // Makes sure that the api refresh is run every 30 seconds.
 const job = schedule.scheduleJob("*/30 * * * * *", Run)
 
 function Run() {
     // Reads into memory the markets that are currently being watched
+    con.connect(function(err) {
+        if (err) throw err;
+
+        console.log("Connected to DB");
+        con.query("select * from markets", (qerr, res) => {
+            console.log(res)
+        })
+    });
+
     fs.readFile(path.resolve("./markets.json"), (marketReadErr, data) => {
         if (marketReadErr) throw marketReadErr
 
