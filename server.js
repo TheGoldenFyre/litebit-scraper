@@ -37,7 +37,7 @@ function CheckMarket(marketAbbr) {
         con.query(`
         SELECT users.UserName, users.Email, usermarkets.Abbr, markets.MarketName, usermarkets.MinSell
         FROM users, usermarkets, markets
-        WHERE usermarkets.Abbr = ${marketAbbr}`,
+        WHERE usermarkets.Abbr = '${marketAbbr}'`,
             (qerr, res) => {
                 console.log(qerr)
                 console.log(res)
