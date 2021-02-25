@@ -23,9 +23,7 @@ function Run() {
 
         console.log("Connected to DB");
         con.query("SELECT * FROM markets;", (qerr, res) => {
-            res.forEach((e) => {
-                console.log(e.Abbr)
-            })
+            console.log(res[0])
         })
     });
     con.end()
