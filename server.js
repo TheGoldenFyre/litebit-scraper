@@ -35,7 +35,7 @@ function CheckMarket(marketAbbr) {
         let marketData = JSON.parse(body)
 
         con.query(`
-        SELECT users.UserName, users.Email, usermarkets.Abbr, markets.MarketName, usermarkets.MinSell
+        SELECT UNIQUE users.UserName, users.Email, usermarkets.Abbr, markets.MarketName, usermarkets.MinSell
         FROM users natural join usermarkets natural join markets
         WHERE usermarkets.Abbr = '${marketAbbr}'`,
             (qerr, res) => {
