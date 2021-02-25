@@ -24,9 +24,11 @@ function Run() {
         console.log("Connected to DB");
         con.query("SELECT * FROM markets;", (qerr, res) => {
             console.log(res[0])
+
+            con.end()
         })
     });
-    con.end()
+    
 
     fs.readFile(path.resolve("./markets.json"), (marketReadErr, data) => {
         if (marketReadErr) throw marketReadErr
