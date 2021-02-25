@@ -35,32 +35,24 @@ function CheckMarket(marketAbbr) {
         let marketData = JSON.parse(body)
 
         con.query(`
-        SELECT DISTINCT users.UserName, users.Email, usermarkets.Abbr, markets.MarketName, usermarkets.MinSell
-        FROM users natural join usermarkets natural join markets
-        WHERE usermarkets.Abbr = '${marketAbbr}'`,
+            SELECT DISTINCT users.UserName, users.Email, usermarkets.MinSell
+            FROM users natural join usermarkets natural join markets
+            WHERE usermarkets.Abbr = '${marketAbbr}'`,
             (qerr, res) => {
-                console.log(qerr)
-                console.log(res)
-            })
+                if (qerr) throw qerr;
 
-        fs.readFile(path.resolve("./notified-users.json"), (userReadError, data) => {
-            if (userReadError) throw userReadError;
-            const users = JSON.parse(data)
-            users.forEach((user) => {
-                HandleUser(user, marketData);
-            })
-        })
+                res.forEach(user => HandleUser(user, marketData))
+            }
+        )
     })
 }
 
 function HandleUser(user, market) {
     market = market.result
-    let selectedUserMarket = user.markets.find(userMarket => market.abbr === userMarket.name)
-    if (selectedUserMarket) {
-        if (selectedUserMarket.minSell < market.sell) {
-            mailjet(user, market)
-        } else {
-            console.log(`Price not high enough.\nUser: ${user.name} - Market: ${market.abbr}\n€${market.sell} - €${selectedUserMarket.minSell}`)
-        }
+
+    if (user.MinSell < market.sell) {
+        mailjet(user, market)
+    } else {
+        console.log(`Price not high enough.\nUser: ${user.UserName} - Market: ${market.abbr}\n€${market.sell} - €${user.MinSell}`)
     }
 }

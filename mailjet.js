@@ -13,13 +13,13 @@ module.exports = (user, market) => {
           },
           "To": [
             {
-              "Email": user.email,
-              "Name": user.name,
+              "Email": user.Email,
+              "Name": user.UserName,
             }
           ],
           "Subject": `${market.name} is ready to sell`,
           "TextPart": `${market.name} is ready to sell`,
-          "HTMLPart": `<h3>Hello ${user.name}</h3><p>The price for ${market.name} just hit your set threshhold!\nIt is now at €${market.sell} / ${market.abbr}. Head over to litebit.eu to sell</p>`,
+          "HTMLPart": `<h3>Hello ${user.UserName}</h3><p>The price for ${market.name} just hit your set threshhold!\nIt is now at €${market.sell} / ${market.abbr}. Head over to litebit.eu to sell</p>`,
           "CustomID": "AppGettingStartedTest"
         }
       ]
