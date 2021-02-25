@@ -20,16 +20,12 @@ const job = schedule.scheduleJob("*/30 * * * * *", Run)
 
 function Run() {
     // Reads into memory the markets that are currently being watched
-    con.connect(function (err) {
-        if (err) throw err;
-
-        console.log("Connected to DB");
-        con.query("SELECT * FROM markets;", (qerr, res) => {
-            res.forEach(market => {
-                CheckMarket(market.Abbr)
-            });
-        })
-    });
+    console.log("Connected to DB");
+    con.query("SELECT * FROM markets;", (qerr, res) => {
+        res.forEach(market => {
+            CheckMarket(market.Abbr)
+        });
+    })
 }
 
 function CheckMarket(marketAbbr) {
