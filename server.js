@@ -35,8 +35,8 @@ function CheckMarket(marketAbbr) {
         let marketData = JSON.parse(body)
 
         con.query(`
-        SELECT users.UserName, users.Email, usermarkets.Abbr, usermarkets.MarketName, usermarkets.MinSell
-        FROM users, usermarkets
+        SELECT users.UserName, users.Email, usermarkets.Abbr, markets.MarketName, usermarkets.MinSell
+        FROM users, usermarkets, markets
         WHERE usermarkets.Abbr = ${marketAbbr}`,
             (qerr, res) => {
                 console.log(qerr)
