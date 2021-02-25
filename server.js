@@ -1,10 +1,11 @@
 const schedule = require("node-schedule")
 const request = require("request")
+const mailjet = require("node-mailjet").connect()
 let fs = require("fs")
 let path = require("path")
 
-// Makes sure that the api refresh is run every 15 seconds.
-const job = schedule.scheduleJob("*/15 * * * * *", Run)
+// Makes sure that the api refresh is run every 30 seconds.
+const job = schedule.scheduleJob("*/30 * * * * *", Run)
 
 function Run() {
     // Reads into memory the markets that are currently being watched
