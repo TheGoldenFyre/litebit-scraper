@@ -35,7 +35,18 @@ function Run() {
 function CheckMarket(marketAbbr) {
     request(`https://api.litebit.eu/market/${marketAbbr}`, (requestErr, res, body) => {
         if (requestErr) throw requestErr
+
         let marketData = JSON.parse(body)
+
+        con.query(`
+        SELECT users.UserName, users.Email, usermarkets.Abbr, usermarkets.MarketName, usermarkets.MinSell
+        FROM users, usermarkets
+        WHERE usermarkets.Abbr = ${marketAbbr}`,
+        (qerr, res) => {
+            console.log(qerr)
+            console.log(res)
+        } )
+
         fs.readFile(path.resolve("./notified-users.json"), (userReadError, data) => {
             if (userReadError) throw userReadError;
             const users = JSON.parse(data)
