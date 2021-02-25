@@ -5,27 +5,28 @@ let fs = require("fs")
 let path = require("path")
 
 var mysql = require('mysql');
+const { on } = require("events")
 var con = mysql.createConnection({
     host: "192.168.2.35",
     user: "crypto",
     password: "CryptoStonks",
     database: "LITEBITDB"
 });
+con.connect((err) => { if (err) throw err })
 
 
 // Makes sure that the api refresh is run every 30 seconds.
 const job = schedule.scheduleJob("*/30 * * * * *", Run)
 
 function Run() {
-    con.end()
     // Reads into memory the markets that are currently being watched
-    con.connect(function(err) {
+    con.connect(function (err) {
         if (err) throw err;
 
         console.log("Connected to DB");
         con.query("SELECT * FROM markets;", (qerr, res) => {
             res.forEach(market => {
-               CheckMarket(market.Abbr) 
+                CheckMarket(market.Abbr)
             });
         })
     });
@@ -41,10 +42,10 @@ function CheckMarket(marketAbbr) {
         SELECT users.UserName, users.Email, usermarkets.Abbr, usermarkets.MarketName, usermarkets.MinSell
         FROM users, usermarkets
         WHERE usermarkets.Abbr = ${marketAbbr}`,
-        (qerr, res) => {
-            console.log(qerr)
-            console.log(res)
-        } )
+            (qerr, res) => {
+                console.log(qerr)
+                console.log(res)
+            })
 
         fs.readFile(path.resolve("./notified-users.json"), (userReadError, data) => {
             if (userReadError) throw userReadError;
