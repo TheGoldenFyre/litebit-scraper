@@ -36,12 +36,8 @@ function CheckMarket(marketAbbr) {
 
         con.query(`
             SELECT DISTINCT users.UserName, users.Email, usermarkets.MinSell
-            FROM (
-                SELECT *
-                FROM users, usermarkets
-                WHERE users.ID = usermarkets.UserID AND
-            )
-            WHERE usermarkets.Abbr = '${marketAbbr}'`,
+            FROM usermarkets, users
+            WHERE usermarkets.Abbr = '${marketAbbr}' AND users.ID = usermarkets.UserID`,
             (qerr, res) => {
                 if (qerr) throw qerr;
 
